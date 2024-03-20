@@ -32,7 +32,7 @@ class MainActivity : ComponentActivity() {
                     modifier = Modifier.fillMaxSize(),
                     color = MaterialTheme.colorScheme.background
                 ) {
-                    Greeting("Android")
+                    MyApp()
                 }
             }
         }
@@ -52,7 +52,8 @@ fun Greeting(name: String, modifier: Modifier = Modifier) {
     ) {
         Row(modifier = modifier.padding(24.dp)) {
             Column(
-                modifier = modifier.weight(1f)
+                modifier = modifier
+                    .weight(1f)
                     .padding(bottom = extraPadding)
             ) {
                 Text(text = "Hello ")
@@ -69,13 +70,32 @@ fun Greeting(name: String, modifier: Modifier = Modifier) {
 }
 
 @Composable
-fun MyApp(
+private fun Greetings(
     modifier: Modifier = Modifier,
-    names: List<String> = listOf("world", "compose")
+    names: List<String> = listOf("World", "Compose")
 ) {
     Column(modifier = modifier.padding(vertical = 4.dp)) {
         for (name in names) {
             Greeting(name = name)
+        }
+    }
+}
+
+@Composable
+fun MyApp(
+modifier: Modifier = Modifier
+) {
+
+    var shouldShowOnboardingScreen by remember {
+        mutableStateOf(true)
+    }
+    Surface(modifier = modifier) {
+        if(shouldShowOnboardingScreen){
+            OnboardingScreen(){
+                shouldShowOnboardingScreen = false
+            }
+        }else{
+            Greetings()
         }
     }
 }
