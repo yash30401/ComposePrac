@@ -18,6 +18,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
+import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
@@ -43,7 +44,7 @@ class MainActivity : ComponentActivity() {
 
 @Composable
 fun Greeting(name: String, modifier: Modifier = Modifier) {
-    var expanded by remember {
+    var expanded by rememberSaveable {
         mutableStateOf(false)
     }
 
@@ -88,7 +89,7 @@ fun MyApp(
 modifier: Modifier = Modifier
 ) {
 
-    var shouldShowOnboardingScreen by remember {
+    var shouldShowOnboardingScreen by rememberSaveable {
         mutableStateOf(true)
     }
     Surface(modifier = modifier) {
