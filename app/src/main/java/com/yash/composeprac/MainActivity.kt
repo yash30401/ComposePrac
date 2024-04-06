@@ -3,6 +3,10 @@ package com.yash.composeprac
 import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
+import androidx.compose.animation.core.AnimationSpec
+import androidx.compose.animation.core.Spring
+import androidx.compose.animation.core.animateDpAsState
+import androidx.compose.animation.core.spring
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxSize
@@ -48,7 +52,13 @@ fun Greeting(name: String, modifier: Modifier = Modifier) {
         mutableStateOf(false)
     }
 
-    val extraPadding = if(expanded) 48.dp else 0.dp
+    val extraPadding by animateDpAsState(
+        if (expanded) 48.dp else 0.dp,
+        animationSpec = spring(
+            Spring.DampingRatioMediumBouncy,
+            Spring.StiffnessLow
+        )
+    )
     Surface(
         color = MaterialTheme.colorScheme.primary,
         modifier = modifier.padding(vertical = 4.dp, horizontal = 8.dp)
@@ -57,7 +67,7 @@ fun Greeting(name: String, modifier: Modifier = Modifier) {
             Column(
                 modifier = modifier
                     .weight(1f)
-                    .padding(bottom = extraPadding)
+                    .padding(bottom = extraPadding.coerceAtLeast(0.dp))
             ) {
                 Text(text = "Hello ")
                 Text(text = name)
@@ -66,7 +76,7 @@ fun Greeting(name: String, modifier: Modifier = Modifier) {
             ElevatedButton(onClick = {
                 expanded = !expanded
             }) {
-                Text(if(expanded) "Show Less" else "Show More")
+                Text(if (expanded) "Show Less" else "Show More")
             }
         }
     }
@@ -75,7 +85,7 @@ fun Greeting(name: String, modifier: Modifier = Modifier) {
 @Composable
 private fun Greetings(
     modifier: Modifier = Modifier,
-    names: List<String> = List(1000){"$it"}
+    names: List<String> = List(1000) { "$it" }
 ) {
     LazyColumn(modifier = modifier.padding(vertical = 4.dp)) {
         items(items = names) {
@@ -86,18 +96,18 @@ private fun Greetings(
 
 @Composable
 fun MyApp(
-modifier: Modifier = Modifier
+    modifier: Modifier = Modifier
 ) {
 
     var shouldShowOnboardingScreen by rememberSaveable {
         mutableStateOf(true)
     }
     Surface(modifier = modifier) {
-        if(shouldShowOnboardingScreen){
-            OnboardingScreen(){
+        if (shouldShowOnboardingScreen) {
+            OnboardingScreen() {
                 shouldShowOnboardingScreen = false
             }
-        }else{
+        } else {
             Greetings()
         }
     }
