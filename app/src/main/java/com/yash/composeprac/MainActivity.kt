@@ -1,5 +1,6 @@
 package com.yash.composeprac
 
+import android.annotation.SuppressLint
 import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
@@ -275,11 +276,12 @@ fun MySootheAppLandscape() {
 }
 
 // Step: MySoothe App
+@SuppressLint("UnusedMaterial3ScaffoldPaddingParameter")
 @Composable
 fun MySootheApp() {
     Scaffold(bottomBar = {
         SootheBottomNavigation()
-    }) { padding ->
+    }) {
         HomeScreen()
     }
 }
