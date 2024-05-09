@@ -62,6 +62,7 @@ import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import com.yash.composeprac.stateincompose.WellnessScreen
 import com.yash.composeprac.ui.theme.MySootheTheme
 import java.util.Locale
 
@@ -75,7 +76,7 @@ class MainActivity : ComponentActivity() {
                     modifier = Modifier.fillMaxSize(),
                     color = MaterialTheme.colorScheme.surface
                 ) {
-                    MySootheApp()
+                    WellnessScreen()
                 }
             }
         }
