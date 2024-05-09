@@ -64,6 +64,9 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.yash.composeprac.stateincompose.WellnessScreen
 import com.yash.composeprac.ui.theme.MySootheTheme
+import com.yash.composeprac.wellness.WellnessTaskItem
+import com.yash.composeprac.wellness.WellnessTaskScreen
+
 import java.util.Locale
 
 class MainActivity : ComponentActivity() {
@@ -76,7 +79,7 @@ class MainActivity : ComponentActivity() {
                     modifier = Modifier.fillMaxSize(),
                     color = MaterialTheme.colorScheme.surface
                 ) {
-                    WellnessScreen()
+                    WellnessTaskScreen()
                 }
             }
         }
